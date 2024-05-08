@@ -141,22 +141,23 @@ def _mirror(image, boxes, prob=0.5):
 
 def preproc(img, input_size, swap=(2, 0, 1)):
     if len(img.shape) == 3:
-        padded_img = np.ones((input_size[0], input_size[1], 3), dtype=np.uint8) * 114
+        padded_img = np.ones((input_size[0], input_size[1], 3), dtype=np.float32) * 114
     else:
-        padded_img = np.ones(input_size, dtype=np.uint8) * 114
+        padded_img = np.ones(input_size, dtype=np.float32) * 114
 
     r = min(input_size[0] / img.shape[0], input_size[1] / img.shape[1])
     resized_img = cv2.resize(
         img,
         (int(img.shape[1] * r), int(img.shape[0] * r)),
-        interpolation=cv2.INTER_LINEAR,
-    ).astype(np.uint8)
+        interpolation=cv2.INTER_AREA,
+    ).astype(np.float32)
     padded_img[: int(img.shape[0] * r), : int(img.shape[1] * r)] = resized_img
 
+    padded_img = cv2.cvtColor(padded_img, cv2.COLOR_BGR2RGB)
+    #padded_img = padded_img.astype(np.float32)
+    padded_img /= 255
     padded_img = padded_img.transpose(swap)
-    padded_img = np.ascontiguousarray(padded_img, dtype=np.float32)
     return padded_img, r
-
 
 class TrainTransform:
     def __init__(self, max_labels=50, flip_prob=0.5, hsv_prob=1.0):
@@ -235,9 +236,4 @@ class ValTransform:
     # assume input is cv2 img for now
     def __call__(self, img, res, input_size):
         img, _ = preproc(img, input_size, self.swap)
-        if self.legacy:
-            img = img[::-1, :, :].copy()
-            img /= 255.0
-            img -= np.array([0.485, 0.456, 0.406]).reshape(3, 1, 1)
-            img /= np.array([0.229, 0.224, 0.225]).reshape(3, 1, 1)
         return img, np.zeros((1, 5))

@@ -177,8 +177,8 @@ class VOCDetection(CacheDataset):
         resized_img = cv2.resize(
             img,
             (int(img.shape[1] * r), int(img.shape[0] * r)),
-            interpolation=cv2.INTER_LINEAR,
-        ).astype(np.uint8)
+            interpolation=cv2.INTER_AREA,
+        ).astype(np.float32)
 
         return resized_img
 

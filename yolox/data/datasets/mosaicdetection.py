@@ -169,15 +169,15 @@ class MosaicDetection(Dataset):
         img, cp_labels, _, _ = self._dataset.pull_item(cp_index)
 
         if len(img.shape) == 3:
-            cp_img = np.ones((input_dim[0], input_dim[1], 3), dtype=np.uint8) * 114
+            cp_img = np.ones((input_dim[0], input_dim[1], 3)) * 114
         else:
-            cp_img = np.ones(input_dim, dtype=np.uint8) * 114
+            cp_img = np.ones(input_dim) * 114
 
         cp_scale_ratio = min(input_dim[0] / img.shape[0], input_dim[1] / img.shape[1])
         resized_img = cv2.resize(
             img,
             (int(img.shape[1] * cp_scale_ratio), int(img.shape[0] * cp_scale_ratio)),
-            interpolation=cv2.INTER_LINEAR,
+            interpolation=cv2.INTER_AREA,
         )
 
         cp_img[
@@ -231,4 +231,4 @@ class MosaicDetection(Dataset):
         origin_img = origin_img.astype(np.float32)
         origin_img = 0.5 * origin_img + 0.5 * padded_cropped_img.astype(np.float32)
 
-        return origin_img.astype(np.uint8), origin_labels
+        return origin_img, origin_labels
