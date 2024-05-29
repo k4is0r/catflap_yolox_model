@@ -1,7 +1,8 @@
 # TODO: Update with exact module version
 numpy
 torch>=1.7
-opencv_python
+#opencv_python
+opencv-python-headless
 loguru
 tqdm
 torchvision
