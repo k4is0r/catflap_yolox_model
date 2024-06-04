@@ -51,7 +51,7 @@ class Exp(MyExp):
 
         return VOCDetection(
             data_dir=os.path.join(get_yolox_datadir(), "VOCdevkit"),
-            image_sets=[('2022', 'train'),
+            image_sets=[('2022', 'train')],
             img_size=self.input_size,
             preproc=TrainTransform(
                 max_labels=50,
