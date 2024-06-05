@@ -18,7 +18,6 @@ class Exp(MyExp):
         self.random_size = (10, 20)
         self.mosaic_scale = (0.5, 1.5)
         self.test_size = (320, 320)
-        self.mosaic_prob = 0.5
         self.enable_mixup = False
         self.num_classes = 1
         self.max_epoch=800
