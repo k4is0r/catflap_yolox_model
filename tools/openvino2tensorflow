@@ -6838,7 +6838,7 @@ def convert(
         yield [image]
     
     def representative_data_set():
-      file_paths = glob.glob("/home/k4is0r/catflap_files/pytorch_models/yolox/datasets/VOCdevkit/VOC2022/PNGImages/*.png")
+      file_paths = glob.glob("/data/catflap/yolox/datasets/VOCdevkit/VOC2022/PNGImages/*.png")
       end = 500
       #end = len(file_paths)
       for i, file_path in enumerate(file_paths[:end]):
