@@ -1,0 +1,20 @@
+FROM nvidia/cuda:11.2.2-cudnn8-devel
+#sudo docker run --gpus all nvidia/cuda:11.2.2-cudnn8-devel nvidia-smi
+
+WORKDIR /data/catflap
+COPY . /data/catflap
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y python3-pip python3-dev python-is-python3 ffmpeg libsm6 libxext6 git && \
+    python3 -m pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
+    
+WORKDIR /data/catflap/yolox
+
+RUN pip install -e .
+
+ENV TF_ENABLE_ONEDNN_OPTS=0
+
