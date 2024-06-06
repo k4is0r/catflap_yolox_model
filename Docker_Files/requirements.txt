@@ -17,6 +17,8 @@ openvino-dev==2021.4.2
 #tensorflow==2.11.1
 tensorflow
 gdown
+onnxruntime==1.10.0
+tflite_runtime==2.11.0
 
 # verified versions
 # pycocotools corresponds to https://github.com/ppwwyyxx/cocoapi
