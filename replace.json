@@ -2,31 +2,31 @@
     "format_version": 2,
     "layers": [
 	{
-            "layer_id": "244",
+            "layer_id": "228",
             "type": "MaxPool",
             "replace_mode": "change_padding_mode",
             "values": "ZERO"
         },
 	{
-            "layer_id": "245",
+            "layer_id": "229",
             "type": "MaxPool",
             "replace_mode": "change_padding_mode",
             "values": "ZERO"
         },
 	{
-            "layer_id": "246",
+            "layer_id": "230",
             "type": "MaxPool",
             "replace_mode": "change_padding_mode",
             "values": "ZERO"
         },
 	{
-            "layer_id": "658",
+            "layer_id": "642",
             "type": "Concat",
             "replace_mode": "change_axis",
             "values": 1
         },
         {
-            "layer_id": "659",
+            "layer_id": "643",
 	    "type": "Const",
             "replace_mode": "direct",
             "values": [

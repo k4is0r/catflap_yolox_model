@@ -3,6 +3,7 @@ FROM nvidia/cuda:11.2.2-cudnn8-devel
 
 WORKDIR /data/catflap
 COPY . /data/catflap
+WORKDIR /data/catflap/yolox
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC && \
     apt-get update && \
@@ -15,8 +16,6 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC &&
     pip install --no-cache-dir -r requirements.txt && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
-    
-WORKDIR /data/catflap/yolox
 
 RUN pip install -e .
 
