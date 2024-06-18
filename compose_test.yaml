@@ -1,0 +1,64 @@
+services:
+  yolox:
+    build:
+      context: .
+    ports:
+      - 8888:8888
+      - 6006:6006
+    image: k4is0r/catflap:yolox_dockerimage_20240606
+    ipc: host
+    volumes:
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+        bind:
+          selinux: z
+      - type: bind
+        source: /data/catflap/catflap_pictures
+        target: /data/catflap/catflap_pictures
+        bind:
+          selinux: z
+      - type: bind
+        source: /mnt/raid0/Privat/Fotos/catflap_pics/sortiert
+        target: /data/catflap/catflap_pictures_orig
+        bind:
+          selinux: z
+      - type: bind
+        source: /mnt/raid0/Privat/Fotos/catflap_pics/unsortiert
+        target: /data/catflap/catflap_pictures_unsortiert
+        bind:
+          selinux: z
+      - type: bind
+        source: /data/catflap/catflap_files/pytorch_models/yolox/YOLOX_outputs/
+        target: /data/catflap/yolox/YOLOX_outputs
+        bind:
+          selinux: z
+      - type: bind
+        source: /data/catflap/catflap_pictures/yolox/voc_annotations/ 
+        target: /data/catflap/yolox/datasets/VOCdevkit/VOC2022/Annotations
+        bind:
+          selinux: z
+      - type: bind
+        source: /data/catflap/catflap_pictures/yolox/voc_ds/
+        target: /data/catflap/yolox/datasets/VOCdevkit/VOC2022/PNGImages
+        bind:
+          selinux: z
+      - type: bind
+        source: /data/catflap/catflap_pictures/yolox/voc_main/
+        target: /data/catflap/yolox/datasets/VOCdevkit/VOC2022/ImageSets/Main
+        bind:
+          selinux: z
+    environment:
+      - DISPLAY=$DISPLAY
+        #command: find /data/catflap/catflap_pictures_unsortiert/orig/no_cat/ -type f -exec bash -c "python demo/yolox_tflite_demo.py --model YOLOX_outputs/yolox_nano_custom_options/saved_model/model_float32.tflite --label labels.txt --imagepath {} --save /data/catflap/yolox/YOLOX_outputs/yolox_nano_custom_options/vis_res/" \;
+    command: tail -f /dev/null
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
