@@ -45,7 +45,6 @@ services:
           selinux: z
     environment:
       - DISPLAY=$DISPLAY
-        #command: tail -f /dev/null
     command: bash -c "nohup jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --ip='0.0.0.0' --port=8888 --no-browser --allow-root --NotebookApp.port_retries=0 --NotebookApp.token=s3cur3 & disown
           && nohup tensorboard --logdir /data/catflap/yolox/YOLOX_outputs/yolox_nano_custom_options/tensorboard --bind_all & disown
           && python tools/train.py -f yolox_nano_custom_options.py --fp16 -o -c yolox_nano_weights.pth
