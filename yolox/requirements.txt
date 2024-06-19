@@ -9,7 +9,7 @@ ninja
 tabulate
 psutil
 tensorboard
-tensorboard_plugin_profile
+torch_tb_profiler
 jupyter
 glob2
 #tensorrt-cu11
