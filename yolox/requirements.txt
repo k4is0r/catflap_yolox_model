@@ -27,3 +27,4 @@ tflite_runtime==2.11.0
 # pycocotools corresponds to https://github.com/ppwwyyxx/cocoapi
 pycocotools>=2.0.2
 tensorflow-datasets
+
