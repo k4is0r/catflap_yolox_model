@@ -23,6 +23,11 @@ class Exp(MyExp):
         self.max_epoch=800
         self.act = "relu"
         self.exp_name = os.path.split(os.path.realpath(__file__))[1].split(".")[0]
+        
+        # Change from Original to TI Version
+        self.conv_focus = True
+        self.split_max_pool_kernel = True
+        self.depthwise = False 
 
     def get_model(self, sublinear=False):
 
@@ -37,11 +42,11 @@ class Exp(MyExp):
             # NANO model use depthwise = True, which is main difference.
             backbone = YOLOPAFPN(
                 self.depth, self.width, in_channels=in_channels,
-                act=self.act, depthwise=True,
+                act=self.act, depthwise=self.depthwise, conv_focus=self.conv_focus, split_max_pool_kernel=self.split_max_pool_kernel
             )
             head = YOLOXHead(
                 self.num_classes, self.width, in_channels=in_channels,
-                act=self.act, depthwise=True
+                act=self.act, depthwise=self.depthwise
             )
             self.model = YOLOX(backbone, head)
 
