@@ -1,0 +1,1 @@
+sudo onnx2tf -i /workdir/YOLOX_outputs/yolox_nano_custom_options/best_ckpt.onnx -o "/workdir/YOLOX_outputs/yolox_nano_custom_options/onnx2tf/" -oiqt -qt per-tensor -ioqd uint8 -cotof -cind "images" "/workdir/YOLOX_outputs/images.npy" "[[[[0,0,0]]]]" "[[[[1,1,1]]]]"

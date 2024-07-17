@@ -27,7 +27,7 @@ class Exp(MyExp):
         # Change from Original to TI Version
         self.conv_focus = True
         self.split_max_pool_kernel = True
-        self.depthwise = False 
+        self.depthwise = True 
 
     def get_model(self, sublinear=False):
 
