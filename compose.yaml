@@ -27,7 +27,7 @@ services:
     ports:
       - 8888:8888
       - 6006:6006
-    image: k4is0r/catflap:yolox_dockerimage_20240711
+    image: k4is0r/catflap:yolox_dockerimage_latest
     ipc: host
     volumes:
       - type: bind
