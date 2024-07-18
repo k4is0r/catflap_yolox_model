@@ -71,7 +71,7 @@ services:
           nohup tensorboard --logdir /data/catflap/yolox/YOLOX_outputs/yolox_nano_custom_options/tensorboard --bind_all & 
           test -f YOLOX_outputs/yolox_nano_custom_options/latest_ckpt.pth
           && python tools/train.py -f yolox_nano_custom_options.py --fp16 --resume -o
-          || python tools/train.py -f yolox_nano_custom_options.py --fp16 -o -c yolox_nano_weights.pth
+          || python tools/train.py -f yolox_nano_custom_options.py --fp16 -o -c yolox_nano_weights_ti.pth
           && python tools/export_onnx.py --output-name YOLOX_outputs/yolox_nano_custom_options/best_ckpt.onnx -f yolox_nano_custom_options.py -c YOLOX_outputs/yolox_nano_custom_options/best_ckpt.pth
           && mkdir YOLOX_outputs/yolox_nano_custom_options/ENDRESULT
           && tail -f /dev/null" 
