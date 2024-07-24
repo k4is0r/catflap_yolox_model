@@ -164,7 +164,8 @@ def main():
 
     elapsed_list = []
 
-    for image in images:
+    for a, image in enumerate(images):
+        print(a)
         frame = cv2.imread(image)
 
         # Image preprocess.
