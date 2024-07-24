@@ -1,8 +1,6 @@
 #/bin/bash
 
-rm /data/catflap/mAP/input/detection-results/*
-rm /data/catflap/mAP/input/ground-truth/*
-rm /data/catflap/mAP/input/images-optional/*
+rm -rf /data/catflap/mAP/input/ground-truth/*
 
 for file in $(cat /data/catflap/catflap_pictures/yolox/voc_main/val.txt)
 do
@@ -11,6 +9,7 @@ do
 done
 
 python /data/catflap/mAP/scripts/extra/convert_gt_xml.py
-rmdir /data/catflap/mAP/outputs
+rm -rf /data/catflap/mAP/outputs
+cd /data/catflap/mAP
 python /data/catflap/mAP/calculate_map_cartucho.py --labels=/data/catflap/mAP/catlabel.txt
 
