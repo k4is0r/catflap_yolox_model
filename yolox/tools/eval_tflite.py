@@ -63,11 +63,11 @@ def set_input_tensor(interpreter, image):
     input_tensor = interpreter.tensor(tensor_index)()[0]
 
     scale, zero_point = input_details['quantization']
-    print("INPUTS:", scale, zero_point)
+    #print("INPUTS:", scale, zero_point)
     if input_details['dtype'] == np.uint8:
         image = image / scale + zero_point
     image = np.expand_dims(image, axis=0).astype(input_details["dtype"])
-    print(image.shape)
+    #print(image.shape)
     input_tensor[:, :] = image.copy()
 
 def preprocess(img, input_size, mean, std):
