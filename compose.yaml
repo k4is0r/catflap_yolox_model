@@ -74,7 +74,8 @@ services:
           || python tools/train.py -f yolox_nano_custom_options.py --fp16 -o -c yolox_nano_weights_ti.pth
           && python tools/export_onnx.py --output-name YOLOX_outputs/yolox_nano_custom_options/best_ckpt.onnx -f yolox_nano_custom_options.py -c YOLOX_outputs/yolox_nano_custom_options/best_ckpt.pth
           && mkdir YOLOX_outputs/yolox_nano_custom_options/ENDRESULT
-          && tail -f /dev/null" 
+          && tail -f /dev/null"
+          #&& python tools/eval_tflite.py --model YOLOX_outputs/yolox_nano_custom_options_conv2d/onnx2tf/best_ckpt_float32.tflite --label labels.txt --threshold 0.5 --imagepath /data/catflap/catflap_pictures/yolox/voc_ds --voc_valpath /data/catflap/catflap_pictures/yolox/voc_main/val.txt --txt_only YOLOX_outputs/yolox_nano_custom_options_conv2d/onnx2tf/tflite_pics_test 
           #&& mo --input_model YOLOX_outputs/yolox_nano_custom_options/best_ckpt.onnx --input_shape [1,3,320,320] --data_type FP16 --output_dir YOLOX_outputs/yolox_nano_custom_options/FP16
           #&& tools/openvino2tensorflow --model_path YOLOX_outputs/yolox_nano_custom_options/FP16/best_ckpt.xml --model_output_path YOLOX_outputs/yolox_nano_custom_options/saved_model --output_saved_model --output_pb --output_no_quant_float32_tflite --output_integer_quant_type 'uint8' --string_formulas_for_normalization 'data / 255' --output_edgetpu --weight_replacement_config replace.json
           #&& python demo/yolox_tflite_demo.py --model YOLOX_outputs/yolox_nano_custom_options/onnx2tf/best_ckpt_full_integer_quant.tflite --label labels.txt --imagepath /data/catflap/yolox/datasets/VOCdevkit/VOC2022/PNGImages/2021-08-03__T08-19-53-71__0.55859375.png
