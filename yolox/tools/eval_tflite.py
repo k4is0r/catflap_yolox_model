@@ -176,11 +176,11 @@ def main():
         interpreter.invoke()
         output_details = interpreter.get_output_details()[0]
         output = interpreter.get_tensor(output_details["index"])
-        print("Output dtype Vorher:", output.dtype)
+        #print("Output dtype Vorher:", output.dtype)
         output = output.astype(np.float32)
-        print("Output dtype Nachher:", output.dtype)
+        #print("Output dtype Nachher:", output.dtype)
         scale, zero_point = output_details['quantization']
-        print("OUTPUTS:", scale, zero_point)
+        #print("OUTPUTS:", scale, zero_point)
         if scale > 0:
             output = scale * (output - zero_point)
 
