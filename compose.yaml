@@ -46,6 +46,11 @@ services:
         bind:
           selinux: z
       - type: bind
+        source: /mnt/raid0/Privat/Fotos/catflap_pics/unsortiert
+        target: /data/catflap/catflap_pictures_unsortiert
+        bind:
+          selinux: z
+      - type: bind
         source: /data/catflap/catflap_files/pytorch_models/yolox/YOLOX_outputs/
         target: /data/catflap/yolox/YOLOX_outputs
         bind:
